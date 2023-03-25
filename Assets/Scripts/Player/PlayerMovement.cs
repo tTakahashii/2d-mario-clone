@@ -5,24 +5,27 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D playerRb;
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private SpriteRenderer playerRenderer;
     [SerializeField] private float movementSpeed = 5f, jumpForce = 7f;
     [SerializeField] private int maxJump = 2;
     private Vector2 velocity;
-    private float xVel = 0f, yVel = 0f;
     private int currentJump = 0;
     private bool inAir = true, shouldJump = false;
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
     {
+        velocity = playerRb.velocity;
         //Debug.Log(inAir);
         //Debug.Log(currentJump);
+
+        if (velocity.x < 0f) playerRenderer.flipX = true;
+        else if (velocity.x > 0f) playerRenderer.flipX = false;
+
+        playerAnimator.SetBool("isRunning", velocity.x != 0f ? true : false);
+        playerAnimator.SetBool("isFalling", velocity.y < 0f ? true : false);
+        playerAnimator.SetBool("isJumping", velocity.y > 0f ? true : false);
 
         velocity.x = Input.GetAxis("Horizontal") * movementSpeed;
 
