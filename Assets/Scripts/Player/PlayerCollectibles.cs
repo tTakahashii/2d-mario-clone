@@ -7,6 +7,9 @@ public class PlayerCollectibles : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI orangeText, cherryText;
 
+    [SerializeField] private AudioSource playerSouce;
+    [SerializeField] private AudioClip[] collectClips;
+
     private int orangeScore = 0, cherryScore = 0;
     private Dictionary<string, int> collectibles;
     private Dictionary<string, TextMeshProUGUI> collectibleTexts;
@@ -32,6 +35,7 @@ public class PlayerCollectibles : MonoBehaviour
         {
             collectibles[collision.tag]++;
             collectibleTexts[collision.tag].text = $"{collision.tag}: {collectibles[collision.tag]}";
+            playerSouce.PlayOneShot(collectClips[Random.Range(0, collectClips.Length)]);
             Destroy(collision.gameObject);
         }
     }

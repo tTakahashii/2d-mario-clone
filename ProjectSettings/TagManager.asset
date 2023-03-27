@@ -8,6 +8,8 @@ TagManager:
   - Orange
   - Cherry
   - Trap
+  - Platform
+  - Death Trigger
   layers:
   - Default
   - TransparentFX

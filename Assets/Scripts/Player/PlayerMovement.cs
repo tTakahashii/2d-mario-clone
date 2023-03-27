@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D playerRb;
     [SerializeField] private BoxCollider2D playerBox;
+    [SerializeField] private AudioSource playerSource;
+    [SerializeField] private AudioClip jumpClip;
     [SerializeField] private LayerMask collisionLayer;
     private Vector2 velocity;
     private bool inAir = true, shouldJump = false;
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = jumpForce;
                 shouldJump = false;
                 currentJump += 1;
+                playerSource.PlayOneShot(jumpClip);
             }
         }
 
