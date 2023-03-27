@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.x = Input.GetAxis("Horizontal") * movementSpeed;
 
-        shouldJump = Input.GetKeyDown("space") ? true : false;
+        shouldJump = Input.GetKeyDown("space") ? true : shouldJump;
 
         currentJump = !inAir ? 0 : Mathf.Clamp(currentJump, 1, maxJump);
 
